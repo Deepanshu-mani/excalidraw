@@ -1,12 +1,13 @@
 "use client";
 import { Input, Button } from "@repo/ui";
-import { HTTP_BACKEND } from "@/config";
+import { HTTP_BACKEND, TEST_USERNAME, TEST_PASSWORD } from "@/config";
 import { use, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
+import toast from "react-hot-toast";
 
 export default function AuthPage({ isSignin }: { isSignin: boolean }) {
   const [name, setName] = useState("");
-  const [username, setUsernanme] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -29,11 +30,15 @@ export default function AuthPage({ isSignin }: { isSignin: boolean }) {
 
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
-        window.location.href = "/dashboard";
+        toast.success(isSignin ? "Successfully signed in!" : "Account created successfully!");
+        setTimeout(() => {
+          window.location.href = "/dashboard";
+        }, 1000);
       }
     } catch (err: any) {
       console.error("Auth Failed", err.response?.data || err.message);
-      alert(err.response?.data?.message || "Authentication failed");
+      const errorMessage = err.response?.data?.message || "Authentication failed";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -62,7 +67,7 @@ export default function AuthPage({ isSignin }: { isSignin: boolean }) {
             className="w-full"
             value={username}
             onChange={(e) => {
-              setUsernanme(e.target.value);
+              setUsername(e.target.value);
             }}
           />
           <Input
@@ -83,6 +88,23 @@ export default function AuthPage({ isSignin }: { isSignin: boolean }) {
                 ? "Sign In"
                 : "Sign Up"}
           </Button>
+          
+          {isSignin && (
+            <Button 
+              onClick={() => {
+                // Fill the fields with test credentials
+                setUsername(TEST_USERNAME);
+                setPassword(TEST_PASSWORD);
+                // Automatically sign in after a brief delay to let the fields update
+                setTimeout(() => {
+                  handleSubmit({ username: TEST_USERNAME, password: TEST_PASSWORD });
+                }, 100);
+              }}
+              className="w-full bg-green-600 hover:bg-green-700 text-white"
+            >
+              🚀 Sign In with Test Cred
+            </Button>
+          )}
         </div>
         <div className="flex items-center justify-center mt-4 text-sm text-white/70">
           {isSignin ? (

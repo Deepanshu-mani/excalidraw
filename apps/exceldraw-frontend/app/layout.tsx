@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,51 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toaster 
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+              color: '#ffffff',
+              border: '1px solid #333333',
+              borderRadius: '12px',
+              padding: '16px 20px',
+              fontSize: '14px',
+              fontWeight: '500',
+              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+            },
+            success: {
+              duration: 3000,
+              style: {
+                background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+                color: '#00ff88',
+                border: '1px solid #00ff88',
+                borderRadius: '12px',
+                padding: '16px 20px',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: '0 10px 25px rgba(0, 255, 136, 0.2), 0 0 0 1px rgba(0, 255, 136, 0.3)',
+                backdropFilter: 'blur(10px)',
+              },
+            },
+            error: {
+              duration: 4000,
+              style: {
+                background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+                color: '#ff4757',
+                border: '1px solid #ff4757',
+                borderRadius: '12px',
+                padding: '16px 20px',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: '0 10px 25px rgba(255, 71, 87, 0.2), 0 0 0 1px rgba(255, 71, 87, 0.3)',
+                backdropFilter: 'blur(10px)',
+              },
+            },
+          }}
+        />
       </body>
     </html>
   );

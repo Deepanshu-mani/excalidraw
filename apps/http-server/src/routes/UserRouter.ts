@@ -5,6 +5,7 @@ import { SignupBody, SigninBody } from "@repo/common/config";
 import { JWT_SECRET } from "@repo/backend-common/config";
 import { prismaClient } from "@repo/db/client";
 import authMiddleware from "../middleware.js";
+import { ZodError } from "zod";
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
@@ -38,8 +39,28 @@ router.post("/signup", async (req, res) => {
     });
   } catch (e) {
     console.error("Sign up error", e);
+    
+    if (e instanceof ZodError) {
+      const firstError = e.issues[0];
+      if (firstError?.path[0] === "username") {
+        return res.status(400).json({
+          message: "Please enter a valid email address",
+        });
+      }
+      if (firstError?.path[0] === "password") {
+        return res.status(400).json({
+          message: "Password must be at least 6 characters long",
+        });
+      }
+      if (firstError?.path[0] === "name") {
+        return res.status(400).json({
+          message: "Please enter your name",
+        });
+      }
+    }
+    
     res.status(500).json({
-      message: "Internal server error",
+      message: "Failed to create account. Please try again.",
     });
   }
 });
@@ -65,8 +86,23 @@ router.post("/signin", async (req, res) => {
     }
   } catch (e) {
     console.error("Error while sign in", e);
+    
+    if (e instanceof ZodError) {
+      const firstError = e.issues[0];
+      if (firstError?.path[0] === "username") {
+        return res.status(400).json({
+          message: "Please enter a valid email address",
+        });
+      }
+      if (firstError?.path[0] === "password") {
+        return res.status(400).json({
+          message: "Please enter your password",
+        });
+      }
+    }
+    
     res.status(500).json({
-      message: "Internal server error",
+      message: "Sign in failed. Please try again.",
     });
   }
 });

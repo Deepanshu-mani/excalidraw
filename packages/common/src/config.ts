@@ -31,6 +31,10 @@ export const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
 // Logging
 export const LOG_LEVEL = process.env.LOG_LEVEL || (IS_PRODUCTION ? "error" : "debug");
 
+// Test Credentials (Development Only)
+export const TEST_USERNAME = process.env.NEXT_PUBLIC_TEST_USERNAME || "test@example.com";
+export const TEST_PASSWORD = process.env.NEXT_PUBLIC_TEST_PASSWORD || "testpassword123";
+
 // Configuration validation
 export function validateConfig() {
   const required = [
