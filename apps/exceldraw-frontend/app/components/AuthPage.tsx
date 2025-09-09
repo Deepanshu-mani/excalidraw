@@ -3,7 +3,6 @@ import { Input, Button } from "@repo/ui";
 import { HTTP_BACKEND } from "@/config";
 import { use, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import { TestCred } from "./TestCred";
 
 export default function AuthPage({ isSignin }: { isSignin: boolean }) {
   const [name, setName] = useState("");
@@ -84,23 +83,6 @@ export default function AuthPage({ isSignin }: { isSignin: boolean }) {
                 ? "Sign In"
                 : "Sign Up"}
           </Button>
-          {isSignin && (
-            <Button
-              onClick={async () => {
-                const { username, password } = TestCred();
-                setUsernanme(username);
-                setPassword(password);
-
-                // Call handleSubmit with test credentials directly
-                await handleSubmit({
-                  username: username,
-                  password: password,
-                });
-              }}
-            >
-              Sign In with Test Cred
-            </Button>
-          )}
         </div>
         <div className="flex items-center justify-center mt-4 text-sm text-white/70">
           {isSignin ? (
