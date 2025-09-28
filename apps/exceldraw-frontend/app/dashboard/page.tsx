@@ -20,7 +20,7 @@ export default function DashBoard() {
   const router = useRouter();
   const [userName, setUserName] = useState<string | null>(null);
   const [avatarUrl, setAvatarUrl] = useState<string>(
-    "https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&size=32"
+    "https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&size=32",
   );
   const [avatarSeed, setAvatarSeed] = useState<string>("");
   const [avatarLoading, setAvatarLoading] = useState(false);
@@ -152,7 +152,10 @@ export default function DashBoard() {
       }
     } catch (err: any) {
       console.error("Failed to join room", err);
-      alert(err.response?.data?.message || "Room not found. Please check the room name or ID.");
+      alert(
+        err.response?.data?.message ||
+          "Room not found. Please check the room name or ID.",
+      );
     } finally {
       setLoading(false);
       setShowJoinModal(false);
@@ -217,7 +220,9 @@ export default function DashBoard() {
               onClick={() => setShowJoinModal(true)}
               className="p-8 rounded-xl border-2 border-dashed border-yellow-500/30 flex flex-col items-start justify-center hover:border-yellow-500/50 hover:shadow-[0_0_20px_rgba(255,255,0,0.1)] transition cursor-pointer"
             >
-              <h2 className="text-xl font-semibold mb-3 text-yellow-400">🔗 Join Room</h2>
+              <h2 className="text-xl font-semibold mb-3 text-yellow-400">
+                🔗 Join Room
+              </h2>
               <p className="text-sm opacity-70">
                 Enter a room ID or name to join someone else's room.
               </p>
@@ -243,7 +248,8 @@ export default function DashBoard() {
                       <div>
                         <div className="font-medium">{room.slug}</div>
                         <div className="text-xs opacity-60 mt-1">
-                          Created {new Date(room.createdAt).toLocaleDateString()}
+                          Created{" "}
+                          {new Date(room.createdAt).toLocaleDateString()}
                         </div>
                       </div>
                       <Trash

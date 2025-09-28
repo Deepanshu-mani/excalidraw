@@ -6,7 +6,12 @@ dotenvConfig({ path: resolve(process.cwd(), "../../.env") });
 
 import { WebSocket, WebSocketServer } from "ws";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET, WS_PORT, validateConfig, config } from "@repo/backend-common/config";
+import {
+  JWT_SECRET,
+  WS_PORT,
+  validateConfig,
+  config,
+} from "@repo/backend-common/config";
 import { prismaClient } from "@repo/db/client";
 
 // Validate configuration

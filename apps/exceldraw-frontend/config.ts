@@ -6,5 +6,5 @@ export {
   AVATAR_FALLBACK_URL,
   TEST_USERNAME,
   TEST_PASSWORD,
-  config
+  config,
 } from "@repo/common/config";

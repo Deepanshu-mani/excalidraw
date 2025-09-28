@@ -5,5 +5,5 @@ export {
   DATABASE_URL,
   JWT_SECRET,
   validateConfig,
-  config
+  config,
 } from "@repo/common/config";

@@ -64,7 +64,6 @@ export class Game {
     this.selectedTool = tool;
   }
 
-
   async init() {
     this.existingShapes = await getExistingShapes(this.roomId);
     this.clearCanvas();
@@ -76,14 +75,14 @@ export class Game {
 
       if (message.type === "chat") {
         const parsedMessage = JSON.parse(message.message);
-        
+
         if (parsedMessage.shape && parsedMessage.shape.type) {
           // Handle new shape - validate shape before adding
           // Note: New shapes from WebSocket won't have messageId initially
           // They'll get proper IDs when fetched from database
           this.existingShapes.push({
             shape: parsedMessage.shape,
-            messageId: -1 // Temporary ID for new shapes
+            messageId: -1, // Temporary ID for new shapes
           });
           this.clearCanvas();
         }
@@ -97,11 +96,14 @@ export class Game {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Filter out invalid shapes and render valid ones
-    this.existingShapes = this.existingShapes.filter(shapeWithId => shapeWithId && shapeWithId.shape && shapeWithId.shape.type);
-    
+    this.existingShapes = this.existingShapes.filter(
+      (shapeWithId) =>
+        shapeWithId && shapeWithId.shape && shapeWithId.shape.type,
+    );
+
     this.existingShapes.forEach((shapeWithId) => {
       if (!shapeWithId || !shapeWithId.shape || !shapeWithId.shape.type) return; // Skip invalid shapes
-      
+
       const shape = shapeWithId.shape;
       this.ctx.strokeStyle = "white";
       this.ctx.lineWidth = 2;
@@ -183,10 +185,9 @@ export class Game {
 
     this.existingShapes.push({
       shape,
-      messageId: -1 // Temporary ID for new shapes
+      messageId: -1, // Temporary ID for new shapes
     });
-    
-    
+
     this.socket.send(
       JSON.stringify({
         type: "chat",
@@ -201,7 +202,7 @@ export class Game {
   mouseMoveHandler = (e: MouseEvent) => {
     //@ts-ignore
     const selectedTool = this.selectedTool;
-    
+
     // Update cursor based on selected tool
     if (selectedTool === "eraser") {
       this.canvas.style.cursor = "crosshair";
@@ -240,12 +241,9 @@ export class Game {
     }
   };
 
-
   initMouseHandlers() {
     this.canvas.addEventListener("mousedown", this.mouseDownHandler);
     this.canvas.addEventListener("mouseup", this.mouseUpHandler);
     this.canvas.addEventListener("mousemove", this.mouseMoveHandler);
   }
-
-
 }

@@ -30,14 +30,19 @@ export default function AuthPage({ isSignin }: { isSignin: boolean }) {
 
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
-        toast.success(isSignin ? "Successfully signed in!" : "Account created successfully!");
+        toast.success(
+          isSignin
+            ? "Successfully signed in!"
+            : "Account created successfully!",
+        );
         setTimeout(() => {
           window.location.href = "/dashboard";
         }, 1000);
       }
     } catch (err: any) {
       console.error("Auth Failed", err.response?.data || err.message);
-      const errorMessage = err.response?.data?.message || "Authentication failed";
+      const errorMessage =
+        err.response?.data?.message || "Authentication failed";
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -88,16 +93,19 @@ export default function AuthPage({ isSignin }: { isSignin: boolean }) {
                 ? "Sign In"
                 : "Sign Up"}
           </Button>
-          
+
           {isSignin && (
-            <Button 
+            <Button
               onClick={() => {
                 // Fill the fields with test credentials
                 setUsername(TEST_USERNAME);
                 setPassword(TEST_PASSWORD);
                 // Automatically sign in after a brief delay to let the fields update
                 setTimeout(() => {
-                  handleSubmit({ username: TEST_USERNAME, password: TEST_PASSWORD });
+                  handleSubmit({
+                    username: TEST_USERNAME,
+                    password: TEST_PASSWORD,
+                  });
                 }, 100);
               }}
               className="w-full bg-green-600 hover:bg-green-700 text-white"

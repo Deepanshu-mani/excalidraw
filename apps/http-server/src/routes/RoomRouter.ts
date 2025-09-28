@@ -18,7 +18,7 @@ router.post("/", authMiddleware, async (req, res) => {
       message: "Unauthorized",
     });
   }
-  
+
   try {
     const room = await prismaClient.room.create({
       data: {
@@ -103,17 +103,16 @@ router.get("/user/rooms", authMiddleware, async (req, res) => {
   }
 });
 
-
 //deltete a room
 router.delete("/:roomId", authMiddleware, async (req, res) => {
-  const  roomId = Number(req.params.roomId);
+  const roomId = Number(req.params.roomId);
   const userId = req.userId;
   if (!userId) {
     return res.status(401).json({
       message: "Unauthorized",
     });
   }
-  
+
   const room = await prismaClient.room.findFirst({
     where: {
       id: roomId,
@@ -125,7 +124,7 @@ router.delete("/:roomId", authMiddleware, async (req, res) => {
       message: "Room not found",
     });
   }
-  
+
   try {
     // Delete all chat messages first, then the room
     await prismaClient.chat.deleteMany({
@@ -133,13 +132,13 @@ router.delete("/:roomId", authMiddleware, async (req, res) => {
         roomId: roomId,
       },
     });
-    
+
     await prismaClient.room.delete({
       where: {
         id: roomId,
       },
     });
-    
+
     res.status(200).json({
       message: "Room deleted successfully",
     });
@@ -149,13 +148,13 @@ router.delete("/:roomId", authMiddleware, async (req, res) => {
       message: "Failed to delete room",
     });
   }
-})
+});
 
 // Delete specific chat messages (shapes) from a room
 router.delete("/chats/:roomId", authMiddleware, async (req, res) => {
   const roomId = Number(req.params.roomId);
   const userId = req.userId;
-  
+
   if (!userId) {
     return res.status(401).json({
       message: "Unauthorized",
@@ -164,7 +163,7 @@ router.delete("/chats/:roomId", authMiddleware, async (req, res) => {
 
   try {
     const { messageIds } = req.body;
-    
+
     if (!Array.isArray(messageIds) || messageIds.length === 0) {
       return res.status(400).json({
         message: "Invalid message IDs",

@@ -39,7 +39,7 @@ router.post("/signup", async (req, res) => {
     });
   } catch (e) {
     console.error("Sign up error", e);
-    
+
     if (e instanceof ZodError) {
       const firstError = e.issues[0];
       if (firstError?.path[0] === "username") {
@@ -58,7 +58,7 @@ router.post("/signup", async (req, res) => {
         });
       }
     }
-    
+
     res.status(500).json({
       message: "Failed to create account. Please try again.",
     });
@@ -86,7 +86,7 @@ router.post("/signin", async (req, res) => {
     }
   } catch (e) {
     console.error("Error while sign in", e);
-    
+
     if (e instanceof ZodError) {
       const firstError = e.issues[0];
       if (firstError?.path[0] === "username") {
@@ -100,7 +100,7 @@ router.post("/signin", async (req, res) => {
         });
       }
     }
-    
+
     res.status(500).json({
       message: "Sign in failed. Please try again.",
     });
@@ -108,7 +108,6 @@ router.post("/signin", async (req, res) => {
 });
 
 router.get("/me", authMiddleware, async (req, res) => {
-
   const userId = req.userId;
   try {
     const user = await prismaClient.user.findUnique({

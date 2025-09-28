@@ -12,7 +12,7 @@ export async function getExistingShapes(roomId: string) {
         if (messageData.shape && messageData.shape.type) {
           return {
             shape: messageData.shape,
-            messageId: x.id
+            messageId: x.id,
           };
         }
         return null;

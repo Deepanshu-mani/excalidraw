@@ -11,6 +11,7 @@ ExcelDraw uses a **centralized configuration system** where all environment vari
 All configuration is managed through a single `.env` file at the project root:
 
 #### `.env` (Root Directory)
+
 ```env
 # ExcelDraw Configuration
 
@@ -41,12 +42,14 @@ LOG_LEVEL=debug
 ## Setup Instructions
 
 ### Option 1: Automated Setup (Recommended)
+
 ```bash
 # Run the setup script
 ./setup-config.sh
 ```
 
 ### Option 2: Manual Setup
+
 ```bash
 # Create .env file manually
 touch .env
@@ -59,10 +62,11 @@ touch .env
    - Modify ports if needed (default: HTTP=4000, WS=8080)
 
 3. **Generate a strong JWT secret:**
+
    ```bash
    # Option 1: Using Node.js
    node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
-   
+
    # Option 2: Using openssl
    openssl rand -hex 64
    ```
@@ -87,7 +91,12 @@ export const config = {
   ports: { http: HTTP_PORT, ws: WS_PORT },
   urls: { httpBackend: HTTP_BACKEND, wsUrl: WS_URL },
   avatars: { primary: AVATAR_PRIMARY_URL, fallback: AVATAR_FALLBACK_URL },
-  app: { nodeEnv: NODE_ENV, isProduction: IS_PRODUCTION, corsOrigin: CORS_ORIGIN, logLevel: LOG_LEVEL },
+  app: {
+    nodeEnv: NODE_ENV,
+    isProduction: IS_PRODUCTION,
+    corsOrigin: CORS_ORIGIN,
+    logLevel: LOG_LEVEL,
+  },
 } as const;
 ```
 

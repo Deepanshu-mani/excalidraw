@@ -7,7 +7,12 @@ export interface ToastProps {
   onClose?: () => void;
 }
 
-export function Toast({ message, type = "info", duration = 4000, onClose }: ToastProps) {
+export function Toast({
+  message,
+  type = "info",
+  duration = 4000,
+  onClose,
+}: ToastProps) {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -57,11 +62,7 @@ export function ToastContainer({ toasts, onRemove }: ToastContainerProps) {
   return (
     <div className="fixed top-4 right-4 z-50 space-y-2">
       {toasts.map((toast) => (
-        <Toast
-          key={toast.id}
-          {...toast}
-          onClose={() => onRemove(toast.id)}
-        />
+        <Toast key={toast.id} {...toast} onClose={() => onRemove(toast.id)} />
       ))}
     </div>
   );

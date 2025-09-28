@@ -6,7 +6,12 @@ config({ path: resolve(process.cwd(), "../../.env") });
 
 import express from "express";
 import mainRouter from "./routes/index.js";
-import { PORT, DATABASE_URL, validateConfig, config as appConfig } from "@repo/backend-common/config";
+import {
+  PORT,
+  DATABASE_URL,
+  validateConfig,
+  config as appConfig,
+} from "@repo/backend-common/config";
 import cors from "cors";
 import { prismaClient } from "@repo/db/client";
 
@@ -20,7 +25,7 @@ async function main() {
     // Validate configuration
     validateConfig();
     console.log("✅ Configuration validated successfully");
-    
+
     // Test the database connection
     await prismaClient.$connect();
     console.log("✅ PostgreSQL DB connection successful");

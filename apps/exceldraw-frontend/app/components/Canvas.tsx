@@ -37,10 +37,7 @@ export function Canvas({
         height={window.innerHeight}
         className="block"
       />
-      <Toolbar 
-        selectedTool={selectedTool} 
-        onToolSelect={setSelectedTool}
-      />
+      <Toolbar selectedTool={selectedTool} onToolSelect={setSelectedTool} />
     </div>
   );
 }

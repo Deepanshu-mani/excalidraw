@@ -4,22 +4,31 @@
 import { z } from "zod";
 
 // Database Configuration
-export const DATABASE_URL = process.env.DATABASE_URL || "postgresql://postgres:mysecretpassword@localhost/draw-app";
+export const DATABASE_URL =
+  process.env.DATABASE_URL ||
+  "postgresql://postgres:mysecretpassword@localhost/draw-app";
 
 // JWT Configuration
 export const JWT_SECRET = process.env.JWT_SECRET || "adsfasdfadf";
 
 // Server Ports
-export const HTTP_PORT = parseInt(process.env.HTTP_PORT || process.env.PORT || "4000", 10);
+export const HTTP_PORT = parseInt(
+  process.env.HTTP_PORT || process.env.PORT || "4000",
+  10,
+);
 export const WS_PORT = parseInt(process.env.WS_PORT || "8080", 10);
 
 // API URLs
-export const HTTP_BACKEND = process.env.NEXT_PUBLIC_HTTP_BACKEND || "http://localhost:4000/api/v1";
+export const HTTP_BACKEND =
+  process.env.NEXT_PUBLIC_HTTP_BACKEND || "http://localhost:4000/api/v1";
 export const WS_URL = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8080";
 
 // Avatar Services
-export const AVATAR_PRIMARY_URL = process.env.NEXT_PUBLIC_AVATAR_PRIMARY_URL || "https://avatar.iran.liara.run/public";
-export const AVATAR_FALLBACK_URL = process.env.NEXT_PUBLIC_AVATAR_FALLBACK_URL || "https://ui-avatars.com/api";
+export const AVATAR_PRIMARY_URL =
+  process.env.NEXT_PUBLIC_AVATAR_PRIMARY_URL ||
+  "https://avatar.iran.liara.run/public";
+export const AVATAR_FALLBACK_URL =
+  process.env.NEXT_PUBLIC_AVATAR_FALLBACK_URL || "https://ui-avatars.com/api";
 
 // Production Configuration
 export const NODE_ENV = process.env.NODE_ENV || "development";
@@ -29,11 +38,14 @@ export const IS_PRODUCTION = NODE_ENV === "production";
 export const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
 
 // Logging
-export const LOG_LEVEL = process.env.LOG_LEVEL || (IS_PRODUCTION ? "error" : "debug");
+export const LOG_LEVEL =
+  process.env.LOG_LEVEL || (IS_PRODUCTION ? "error" : "debug");
 
 // Test Credentials (Development Only)
-export const TEST_USERNAME = process.env.NEXT_PUBLIC_TEST_USERNAME || "test@example.com";
-export const TEST_PASSWORD = process.env.NEXT_PUBLIC_TEST_PASSWORD || "testpassword123";
+export const TEST_USERNAME =
+  process.env.NEXT_PUBLIC_TEST_USERNAME || "test@example.com";
+export const TEST_PASSWORD =
+  process.env.NEXT_PUBLIC_TEST_PASSWORD || "testpassword123";
 
 // Configuration validation
 export function validateConfig() {
@@ -43,13 +55,17 @@ export function validateConfig() {
   ];
 
   const missing = required.filter(({ value }) => !value);
-  
+
   if (missing.length > 0) {
-    throw new Error(`Missing required environment variables: ${missing.map(m => m.key).join(", ")}`);
+    throw new Error(
+      `Missing required environment variables: ${missing.map((m) => m.key).join(", ")}`,
+    );
   }
 
   if (IS_PRODUCTION && JWT_SECRET === "adsfasdfadf") {
-    console.warn("⚠️  Using default JWT_SECRET in production! Please set a strong secret.");
+    console.warn(
+      "⚠️  Using default JWT_SECRET in production! Please set a strong secret.",
+    );
   }
 }
 

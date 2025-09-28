@@ -1,6 +1,13 @@
 "use client";
 
-import { RectangleHorizontal, Circle, Minus, Eraser, Undo, Redo } from "lucide-react";
+import {
+  RectangleHorizontal,
+  Circle,
+  Minus,
+  Eraser,
+  Undo,
+  Redo,
+} from "lucide-react";
 
 export type Tool = "rect" | "circle" | "line" | "eraser" | "select";
 
@@ -9,15 +16,17 @@ interface ToolbarProps {
   onToolSelect: (tool: Tool) => void;
 }
 
-export function Toolbar({ 
-  selectedTool, 
-  onToolSelect
-}: ToolbarProps) {
+export function Toolbar({ selectedTool, onToolSelect }: ToolbarProps) {
   const tools = [
     { id: "rect" as Tool, icon: RectangleHorizontal, label: "Rectangle" },
     { id: "circle" as Tool, icon: Circle, label: "Circle" },
     { id: "line" as Tool, icon: Minus, label: "Line" },
-    { id: "eraser" as Tool, icon: Eraser, label: "Eraser (Coming Soon)", disabled: true },
+    {
+      id: "eraser" as Tool,
+      icon: Eraser,
+      label: "Eraser (Coming Soon)",
+      disabled: true,
+    },
   ];
 
   return (
@@ -54,15 +63,14 @@ export function Toolbar({
               disabled
                 ? "text-white/30 cursor-not-allowed"
                 : selectedTool === id
-                ? "bg-white/20 text-white shadow-lg"
-                : "text-white/60 hover:text-white hover:bg-white/20"
+                  ? "bg-white/20 text-white shadow-lg"
+                  : "text-white/60 hover:text-white hover:bg-white/20"
             }`}
             title={label}
           >
             <Icon size={20} />
           </button>
         ))}
-
       </div>
     </div>
   );

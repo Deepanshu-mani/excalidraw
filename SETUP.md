@@ -5,12 +5,14 @@ Simple setup for ExcelDraw with centralized configuration.
 ## Quick Start
 
 ### 1. Setup Configuration
+
 ```bash
 # Automated setup (creates .env with generated JWT secret)
 ./setup-config.sh
 ```
 
 ### 2. Start Services
+
 ```bash
 pnpm dev
 ```
