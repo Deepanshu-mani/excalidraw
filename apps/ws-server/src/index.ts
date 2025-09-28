@@ -1,3 +1,9 @@
+import { config as dotenvConfig } from "dotenv";
+import { resolve } from "path";
+
+// Load environment variables from project root
+dotenvConfig({ path: resolve(process.cwd(), "../../.env") });
+
 import { WebSocket, WebSocketServer } from "ws";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET, WS_PORT, validateConfig, config } from "@repo/backend-common/config";

@@ -26,7 +26,9 @@ export default function DashBoard() {
   const [avatarLoading, setAvatarLoading] = useState(false);
   const [rooms, setRooms] = useState<Room[]>([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showJoinModal, setShowJoinModal] = useState(false);
   const [roomName, setRoomName] = useState("");
+  const [joinRoomInput, setJoinRoomInput] = useState("");
   const [loading, setLoading] = useState(false);
 
   const generateAvatarForUser = (name: string, seed: string) => {
@@ -129,6 +131,35 @@ export default function DashBoard() {
     router.push(`/canvas/${roomId}`);
   };
 
+  const handleJoinRoomByInput = async () => {
+    if (!joinRoomInput.trim()) return;
+
+    setLoading(true);
+    try {
+      // Try to join by room ID first (if it's a number)
+      const roomId = parseInt(joinRoomInput.trim());
+      if (!isNaN(roomId)) {
+        router.push(`/canvas/${roomId}`);
+        return;
+      }
+
+      // Try to join by room slug/name
+      const res = await axiosInstance.get(`/room/${joinRoomInput.trim()}`);
+      if (res.data.room && res.data.room.id) {
+        router.push(`/canvas/${res.data.room.id}`);
+      } else {
+        alert("Room not found. Please check the room name or ID.");
+      }
+    } catch (err: any) {
+      console.error("Failed to join room", err);
+      alert(err.response?.data?.message || "Room not found. Please check the room name or ID.");
+    } finally {
+      setLoading(false);
+      setShowJoinModal(false);
+      setJoinRoomInput("");
+    }
+  };
+
   const handleDeleteRoom = async (roomId: number) => {
     if (!roomId) return;
 
@@ -178,6 +209,17 @@ export default function DashBoard() {
               <h2 className="text-xl font-semibold mb-3">＋ Create New Room</h2>
               <p className="text-sm opacity-70">
                 Start a fresh collaboration space instantly.
+              </p>
+            </div>
+
+            {/* Card to join an existing room */}
+            <div
+              onClick={() => setShowJoinModal(true)}
+              className="p-8 rounded-xl border-2 border-dashed border-yellow-500/30 flex flex-col items-start justify-center hover:border-yellow-500/50 hover:shadow-[0_0_20px_rgba(255,255,0,0.1)] transition cursor-pointer"
+            >
+              <h2 className="text-xl font-semibold mb-3 text-yellow-400">🔗 Join Room</h2>
+              <p className="text-sm opacity-70">
+                Enter a room ID or name to join someone else's room.
               </p>
             </div>
 
@@ -247,6 +289,40 @@ export default function DashBoard() {
                   className="flex-1 px-4 py-2 bg-white text-black font-semibold rounded-lg hover:bg-black hover:text-white border border-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? "Creating..." : "Create"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Join Room Modal */}
+        {showJoinModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-black p-6 rounded-2xl border border-yellow-500/30 shadow-[0_0_30px_rgba(255,255,0,0.15)] w-full max-w-md transition-all duration-300">
+              <h3 className="text-2xl font-bold mb-6 text-center tracking-wide text-yellow-400">
+                Join Room
+              </h3>
+              <input
+                type="text"
+                placeholder="Room ID or Room Name"
+                value={joinRoomInput}
+                onChange={(e) => setJoinRoomInput(e.target.value)}
+                className="w-full p-3 bg-black border border-yellow-500/30 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-yellow-500 focus:shadow-[0_0_10px_rgba(255,255,0,0.4)] mb-6 transition-all"
+                onKeyPress={(e) => e.key === "Enter" && handleJoinRoomByInput()}
+              />
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowJoinModal(false)}
+                  className="flex-1 px-4 py-2 border border-white/30 rounded-lg text-white hover:bg-white hover:text-black transition-all duration-300"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleJoinRoomByInput}
+                  disabled={loading || !joinRoomInput.trim()}
+                  className="flex-1 px-4 py-2 bg-yellow-500 text-black font-semibold rounded-lg hover:bg-yellow-400 border border-yellow-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Joining..." : "Join"}
                 </button>
               </div>
             </div>
