@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd ../.. && pnpm run build --filter=@repo/ui && pnpm run build --filter=exceldraw-frontend",
+  "installCommand": "cd ../.. && pnpm install",
+  "framework": "nextjs"
+}
