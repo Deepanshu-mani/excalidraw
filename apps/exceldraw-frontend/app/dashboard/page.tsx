@@ -188,7 +188,7 @@ export default function DashBoard() {
         {/* Top Navbar */}
         <header className="w-full flex items-center justify-between px-6 py-4 border-b border-white/10">
           <Link href="/" className="text-2xl font-extrabold tracking-wide">
-            ⚡ Exceldraw
+            ⚡ Excalidraw
           </Link>
           <div className="flex items-center space-x-4">
             <Profile

@@ -19,7 +19,7 @@ export default function Home() {
       {/* Navbar */}
       <nav className="flex items-center justify-between px-8 py-4 border-b border-white/10">
         <div className="text-2xl font-extrabold tracking-tight text-white select-none">
-          Exceldraw
+          Excalidraw
         </div>
         <div className="flex gap-4">
           {isAuthenticated ? (
@@ -157,7 +157,7 @@ export default function Home() {
               <Globe className="w-10 h-10 text-white/80" />
               <h3 className="text-lg font-semibold">Custom Integrations</h3>
               <p className="text-sm text-white/70">
-                Extend Exceldraw with plugins and integrations tailored to your
+                Extend Excalidraw with plugins and integrations tailored to your
                 unique workflow.
               </p>
             </div>
@@ -167,7 +167,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="text-center py-4 border-t border-white/10 text-white/60 text-sm">
-        &copy; {new Date().getFullYear()} Exceldraw. All rights reserved.
+        &copy; {new Date().getFullYear()} Excalidraw. All rights reserved.
       </footer>
     </div>
   );
