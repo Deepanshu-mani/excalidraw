@@ -1,6 +1,6 @@
-import express from "express";
+import express, { Router } from "express";
 import authMiddleware from "../middleware.js";
-const router = express.Router();
+const router: Router = express.Router();
 import { CreateRoom } from "@repo/common/config";
 import { prismaClient } from "@repo/db/client";
 

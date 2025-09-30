@@ -8,7 +8,11 @@
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "skipLibCheck": true,
     "noImplicitAny": false,
-    "strict": false
+    "strict": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
   "include": ["src", "**/*.d.ts"],
   "files": ["src/types/index.d.ts"]

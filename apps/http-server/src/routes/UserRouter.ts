@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { SignupBody, SigninBody } from "@repo/common/config";
@@ -6,7 +6,7 @@ import { JWT_SECRET } from "@repo/backend-common/config";
 import { prismaClient } from "@repo/db/client";
 import authMiddleware from "../middleware.js";
 import { ZodError } from "zod";
-const router = express.Router();
+const router: Router = express.Router();
 
 router.post("/signup", async (req, res) => {
   try {
