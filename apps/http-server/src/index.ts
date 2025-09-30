@@ -17,7 +17,20 @@ import { prismaClient } from "@repo/db/client";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Configure CORS for production
+const corsOptions = {
+  origin: [
+    "https://xtmani.excalidraw.com",
+    "http://localhost:3000",
+    "http://localhost:3001"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
+
+app.use(cors(corsOptions));
 app.use("/api/v1", mainRouter);
 
 async function main() {
