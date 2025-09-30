@@ -20,8 +20,8 @@ export const WS_PORT = parseInt(process.env.WS_PORT || "8080", 10);
 
 // API URLs
 export const HTTP_BACKEND =
-  process.env.NEXT_PUBLIC_HTTP_BACKEND || "http://localhost:4000/api/v1";
-export const WS_URL = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8080";
+  process.env.NEXT_PUBLIC_HTTP_BACKEND || "http://localhost:4000/api/v1" || "http://api.excalidraw.xtmani.com/";
+export const WS_URL = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8080" || "http://ws.excalidraw.xtmani.com/";
 
 // Avatar Services
 export const AVATAR_PRIMARY_URL =
@@ -35,7 +35,7 @@ export const NODE_ENV = process.env.NODE_ENV || "development";
 export const IS_PRODUCTION = NODE_ENV === "production";
 
 // CORS Configuration
-export const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
+export const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000" || "http://excalidraw.xtmani.com/";
 
 // Logging
 export const LOG_LEVEL =
