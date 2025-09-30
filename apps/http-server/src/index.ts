@@ -22,6 +22,8 @@ app.use(express.json());
 const corsOptions = {
   origin: [
     "https://xtmani.excalidraw.com",
+    "https://api.xtmani.excalidraw.com", 
+    "https://ws.xtmani.excalidraw.com",
     "http://localhost:3000",
     "http://localhost:3001"
   ],
