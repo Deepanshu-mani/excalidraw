@@ -5,7 +5,10 @@
     "outDir": "./dist",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": false
   },
   "include": ["src", "**/*.d.ts"],
   "files": ["src/types/index.d.ts"]
