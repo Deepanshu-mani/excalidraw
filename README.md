@@ -1,26 +1,39 @@
-# Turborepo starter
+# ExcelDraw - Real-time Collaborative Drawing Application
 
-This Turborepo starter is maintained by the Turborepo core team.
+A full-stack monorepo application for real-time collaborative drawing with modern web technologies.
 
-## Using this example
+## Quick Start
 
-Run the following command:
+### 1. Setup Configuration
 
-```sh
-npx create-turbo@latest
+```bash
+# Automated setup (creates .env with generated JWT secret)
+./setup-config.sh
 ```
 
-## What's inside?
+### 2. Start Services
 
-This Turborepo includes the following packages/apps:
+```bash
+pnpm dev
+```
+
+That's it! 🎉
+
+## Architecture
+
+This monorepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `exceldraw-frontend`: Next.js frontend application
+- `http-server`: Express.js REST API server
+- `ws-server`: WebSocket server for real-time communication
+- `@repo/ui`: Shared React component library
+- `@repo/db`: Database layer with Prisma ORM
+- `@repo/common`: Shared configuration and utilities
+- `@repo/backend-common`: Backend-specific utilities
+- `@repo/eslint-config`: ESLint configurations
+- `@repo/typescript-config`: TypeScript configurations
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
