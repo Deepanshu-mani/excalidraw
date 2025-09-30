@@ -1,4 +1,4 @@
-# ExcelDraw - Real-time Collaborative Drawing Application
+# Excalidraw - Real-time Collaborative Drawing Application
 
 A full-stack monorepo application for real-time collaborative drawing with modern web technologies.
 
@@ -25,7 +25,7 @@ This monorepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `exceldraw-frontend`: Next.js frontend application
+- `excalidraw-frontend`: Next.js frontend application
 - `http-server`: Express.js REST API server
 - `ws-server`: WebSocket server for real-time communication
 - `@repo/ui`: Shared React component library

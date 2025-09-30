@@ -64,12 +64,11 @@ export default function Home() {
         <div className="flex flex-col justify-center text-left md:text-left">
           <h1 className="text-5xl sm:text-7xl font-extrabold mb-6 text-white">
             Draw, Collaborate,
-            <br className="hidden sm:block" /> Excel Visually.
+            <br className="hidden sm:block" /> Create Visually.
           </h1>
           <p className="text-lg sm:text-2xl text-white/80 mb-10 max-w-2xl">
             The ultimate online whiteboard for teams & creators. Unleash your
-            ideas and collaborate in real-time, with the power of spreadsheets
-            and drawing combined.
+            ideas and collaborate in real-time with powerful drawing tools.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-start">
             <Link href="/signup">
@@ -115,7 +114,7 @@ export default function Home() {
       <section id="features" className="bg-black text-white py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Why Choose Exceldraw
+            Why Choose Excalidraw
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
