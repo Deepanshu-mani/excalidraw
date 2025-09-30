@@ -12,7 +12,8 @@
     "noImplicitReturns": false,
     "noImplicitThis": false,
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "types": []
   },
   "include": ["src", "**/*.d.ts"],
   "files": ["src/types/index.d.ts"]
