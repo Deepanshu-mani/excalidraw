@@ -88,7 +88,7 @@ export default function Home() {
         <div className="flex justify-center items-center">
           <video
             className="w-full object-cover rounded-lg shadow-lg h-80 md:h-[500px]"
-            src="/GEnAI.mp4"
+            src="/GenAI.mp4"
             autoPlay
             muted
             preload="auto"
